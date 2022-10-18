@@ -230,7 +230,7 @@ async function main() {
     let billinginfo = await billing_info();
     //BOT Functions
     //Store Input
-    let store = store_input_list.includes(store_input.toLowerCase())
+    let store = userinput_store()
     //Product Input
     let product = await userinput_product();
     //Inventory/Restock or Buy Product
