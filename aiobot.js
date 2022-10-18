@@ -260,7 +260,7 @@ async function main() {
         } if (product_amount > 1) {
             console.log(`${product} in stock, attempting to Buy`)
             await buy_product(store, product, quantity_to_buy, shippinginfo, billinginfo)
-        } console.log(/*`${product}'s Bought: ${asdf}`*/)
+        } console.log(/*`${product} Amount Bought: ${asdf}`*/)
     }
 }
 
