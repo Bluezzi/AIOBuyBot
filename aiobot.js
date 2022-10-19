@@ -246,7 +246,7 @@ async function main() {
     let billinginfo = await billing_info();
     //BOT Functions
     //Store Input
-    let store = userinput_store();
+    let store = await userinput_store();
     //Product Input
     let product = await userinput_product();
     //Prudct size if applicable 
