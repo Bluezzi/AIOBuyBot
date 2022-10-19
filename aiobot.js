@@ -302,7 +302,7 @@ async function main() {
                 console.log(`${product} not in stock, retrying \n *LEAVE PROGRAM RUNNING*`)
             } if (product_amount > 1) {
                 console.log(`${product} in stock, attempting to Buy`)
-                await buy_product(store, product, product_size, product_price_cap, quantity_to_buy, shippinginfo, billinginfo)
+                await buy_product(store, product, product_size, product_price_cap, quantity_to_buy, shippinginfo, billinginfo);
             } console.log(`${product}'s Bought: ${quantity_to_buy}`)
         }
     }
