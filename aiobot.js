@@ -246,7 +246,7 @@ async function main() {
     let billinginfo = await billing_info();
     //BOT Functions
     //Store Input
-    let store = userinput_store()
+    let store = userinput_store();
     //Product Input
     let product = await userinput_product();
     //Prudct size if applicable 
@@ -279,7 +279,7 @@ async function main() {
         } if (product_amount > 1) {
             console.log(`${product} in stock, attempting to Buy`)
             await buy_product(store, product, quantity_to_buy, shippinginfo, billinginfo)
-        } console.log(/*`${product}'s Bought: ${asdf}`*/)
+        } console.log(`${product}'s Bought: ${quantity_to_buy}`)
     }
 }
 
