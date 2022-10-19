@@ -90,7 +90,23 @@ const userinput_inventoryrestock_pr_buy = () => {
     })
 }
 
+//function that sets the product size
+const product_size = () => {
+    return new Promise((resolve, reject) => {
+        rl.question(`How many would you like to purchase? \n`, (amount_to_purchase) => {
+            if (isNaN(amount_to_purchase)) {
+                reject(new Error("Please input a value higher than ZERO"))
+            } else if (amount_to_purchase < 0) {
+                reject(new Error("Please input a value higher than ZERO"))
+            } else {
+                resolve (amount_to_purchase)
+            }
+            console.log(`Amount to purchase: ${amount_to_purchase}`)
+        })
+    })
+}
 
+//Function that sets the quantity to buy
 const userinput_quantity_to_buy = () => {
     return new Promise((resolve, reject) => {
         rl.question(`How many would you like to purchase? \n`, (amount_to_purchase) => {
@@ -233,6 +249,7 @@ async function main() {
     let store = userinput_store()
     //Product Input
     let product = await userinput_product();
+    //Prudct size if applicable 
     //Inventory/Restock or Buy Product
     let action_command = await userinput_inventoryrestock_pr_buy();
     let ir_action_command_list = [
@@ -252,6 +269,8 @@ async function main() {
     } else {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
+        //if applicable
+        let productsize = 
         let quantity_to_buy = await userinput_quantity_to_buy();
         if (quantity_to_buy > product_amount)
             return quantity_to_buy = product_amount
