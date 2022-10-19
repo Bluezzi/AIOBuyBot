@@ -91,17 +91,17 @@ const userinput_inventoryrestock_pr_buy = () => {
 }
 
 //function that sets the product size
-const product_size = () => {
+const userinput_product_size = () => {
     return new Promise((resolve, reject) => {
-        rl.question(`How many would you like to purchase? \n`, (amount_to_purchase) => {
-            if (isNaN(amount_to_purchase)) {
+        rl.question(`Please pick the size you would like to purchase \n`, (size_of_the_product) => {
+            if (isNaN(size_of_the_product)) {
                 reject(new Error("Please input a value higher than ZERO"))
-            } else if (amount_to_purchase < 0) {
+            } else if (size_of_the_product < 0) {
                 reject(new Error("Please input a value higher than ZERO"))
             } else {
-                resolve (amount_to_purchase)
+                resolve (size_of_the_product)
             }
-            console.log(`Amount to purchase: ${amount_to_purchase}`)
+            console.log(`Product Size: ${size_of_the_product}`)
         })
     })
 }
@@ -270,7 +270,7 @@ async function main() {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
         //if applicable
-        let productsize = 
+        let product_size = userinput_product_size();
         let quantity_to_buy = await userinput_quantity_to_buy();
         if (quantity_to_buy > product_amount)
             return quantity_to_buy = product_amount
@@ -278,7 +278,7 @@ async function main() {
             console.log(`${product} not in stock, retrying \n *LEAVE PROGRAM RUNNING*`)
         } if (product_amount > 1) {
             console.log(`${product} in stock, attempting to Buy`)
-            await buy_product(store, product, quantity_to_buy, shippinginfo, billinginfo)
+            await buy_product(store, product, product_size, quantity_to_buy, shippinginfo, billinginfo)
         } console.log(`${product}'s Bought: ${quantity_to_buy}`)
     }
 }
