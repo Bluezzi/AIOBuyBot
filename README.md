@@ -1,3 +1,5 @@
+//GUMY Scalper Bot
+
 //This bot works for BestBuy, Gamestop, Nike, Adidas, Footlocker, and etc
 
 //desktop app that is :
