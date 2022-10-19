@@ -291,7 +291,7 @@ async function main() {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
         //if applicable
-        if (store = "n,", "a", "fl",) {
+        if (store == "n,", "a", "fl") {
             let product_size = await userinput_product_size();
         } else {
             let quantity_to_buy = await userinput_quantity_to_buy();
