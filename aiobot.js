@@ -90,6 +90,7 @@ const userinput_inventoryrestock_pr_buy = () => {
     })
 }
 
+
 //function that sets the product size
 const userinput_product_size = () => {
     return new Promise((resolve, reject) => {
@@ -99,12 +100,30 @@ const userinput_product_size = () => {
             } else if (size_of_the_product < 0) {
                 reject(new Error("Please input a value higher than ZERO"))
             } else {
-                resolve (size_of_the_product)
+                resolve(size_of_the_product)
             }
             console.log(`Product Size: ${size_of_the_product}`)
         })
     })
 }
+
+
+//Function that sets a price cap
+const userinput_price_cap = () => {
+    return new Promise((resolve, reject) => {
+        rl.question(`Please pick the size you would like to purchase \n`, (price_cap_of_the_product) => {
+            if (isNaN(price_cap_of_the_product)) {
+                reject(new Error("Please input a value higher than ZERO"))
+            } else if (price_cap_of_the_product < 0) {
+                reject(new Error("Please input a value higher than ZERO"))
+            } else {
+                resolve(price_cap_of_the_product)
+            }
+            console.log(`Product Price Cap: ${price_cap_of_the_product}`)
+        })
+    })
+}
+
 
 //Function that sets the quantity to buy
 const userinput_quantity_to_buy = () => {
@@ -115,7 +134,7 @@ const userinput_quantity_to_buy = () => {
             } else if (amount_to_purchase < 0) {
                 reject(new Error("Please input a value higher than ZERO"))
             } else {
-                resolve (amount_to_purchase)
+                resolve(amount_to_purchase)
             }
             console.log(`Amount to purchase: ${amount_to_purchase}`)
         })
@@ -200,8 +219,9 @@ async function product_restock_info(store, product) {
     }
 }
 
+
 //AIO Buy Bot
-async function buy_product(store, product, quantity_to_buy, shippinginfo, billinginfo) {
+async function buy_product(store, product, product_size, product_price_cap, quantity_to_buy, shippinginfo, billinginfo) {
     //Best Buy (store) (product)
     //Function that buys product
     if (store == "BestBuy", "bestbuy", "bb", "BB") {
@@ -238,6 +258,7 @@ async function buy_product(store, product, quantity_to_buy, shippinginfo, billin
     }
 }
 
+
 //Runs the whole program, Inventory Amounts, Restock Info, and Buying
 async function main() {
     console.log('Stores Available: \n BestBuy, GameStop, Nike, Adidas, FootLocker \n *BB, GS, N, A, FL*')
@@ -270,16 +291,20 @@ async function main() {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
         //if applicable
-        let product_size = userinput_product_size();
-        let quantity_to_buy = await userinput_quantity_to_buy();
-        if (quantity_to_buy > product_amount)
-            return quantity_to_buy = product_amount
-        while (product_amount == 0) {
-            console.log(`${product} not in stock, retrying \n *LEAVE PROGRAM RUNNING*`)
-        } if (product_amount > 1) {
-            console.log(`${product} in stock, attempting to Buy`)
-            await buy_product(store, product, product_size, quantity_to_buy, shippinginfo, billinginfo)
-        } console.log(`${product}'s Bought: ${quantity_to_buy}`)
+        if (store = "n,", "a", "fl",) {
+            let product_size = await userinput_product_size();
+        } else {
+            let quantity_to_buy = await userinput_quantity_to_buy();
+            let product_price_cap = await userinput_price_cap();
+            if (quantity_to_buy > product_amount)
+                return quantity_to_buy = product_amount
+            while (product_amount == 0) {
+                console.log(`${product} not in stock, retrying \n *LEAVE PROGRAM RUNNING*`)
+            } if (product_amount > 1) {
+                console.log(`${product} in stock, attempting to Buy`)
+                await buy_product(store, product, product_size, product_price_cap, quantity_to_buy, shippinginfo, billinginfo)
+            } console.log(`${product}'s Bought: ${quantity_to_buy}`)
+        }
     }
 }
 
