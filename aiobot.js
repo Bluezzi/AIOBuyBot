@@ -265,12 +265,14 @@ async function main() {
     //Shipping and billing Information
     let shippinginfo = await shipping_info();
     let billinginfo = await billing_info();
+
     //BOT Functions
     //Store Input
     let store = await userinput_store();
+
     //Product Input
     let product = await userinput_product();
-    //Prudct size if applicable 
+
     //Inventory/Restock or Buy Product
     let action_command = await userinput_inventoryrestock_pr_buy();
     let ir_action_command_list = [
@@ -290,7 +292,8 @@ async function main() {
     } else {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
-        //if applicable
+        
+        //Prudct size if applicable 
         if (store == "n,", "a", "fl") {
             let product_size = await userinput_product_size();
         } else {
