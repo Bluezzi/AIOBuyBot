@@ -9,6 +9,8 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
+//Email Sender
+//Import Here
 
 //Function that handles shipping information
 async function shipping_info() {
@@ -139,6 +141,12 @@ const userinput_quantity_to_buy = () => {
             console.log(`Amount to purchase: ${amount_to_purchase}`)
         })
     })
+}
+
+
+//Function that emails the user about inventory and restock info
+async function email_sender(store, product) {
+    //code to send the email here
 }
 
 
@@ -289,6 +297,8 @@ async function main() {
         console.log(`${product} in stock: ${product_amount}`)
         let restock_info = await product_restock_info(store, product);
         console.log(`${product} Restock Info: ${restock_info}`)
+        let send_info_email = await email_sender(store, product);
+        console.log(`Inventory and Restock Info has been sent via e-mail`)
     } else {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
