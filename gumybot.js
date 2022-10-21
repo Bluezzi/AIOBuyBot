@@ -144,6 +144,7 @@ const userinput_quantity_to_buy = () => {
 }
 
 
+/*
 //Function that emails the user about inventory and restock info
 async function email_sender(store, product, product_amount, restock_info) {
     // Generate test SMTP service account from ethereal.email
@@ -173,6 +174,7 @@ async function email_sender(store, product, product_amount, restock_info) {
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }
+*/
 
 
 //AIO Inventory 
