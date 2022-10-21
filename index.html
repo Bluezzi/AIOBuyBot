@@ -1,17 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gumy Bot</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gummy Scalper Bot</title>
 
     <style>
-        
-    </style>
-  </head>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <body>
-    hello
-  </body>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .center {
+            margin: auto;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        header {
+            border: solid black 3px;
+            width: 100vw;
+            height: 50px;
+            text-align: center;
+            font-size: 2rem;
+            background-color: #6a8de2;
+            color: white;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+        }
+
+        #product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background-color: #8f8f8f;
+            color: white;
+        }
+
+        .product {
+            border: solid black 3px;
+        }
+
+        .product>.p80 {
+            flex-grow: 4;
+        }
+
+        #billing-grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            background-color: #b588eb;
+            color: white;
+        }
+
+        #billing-grid>div {
+            border: solid black 3px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        footer {
+            border: solid black 3px;
+            display: flex;
+            flex-direction: row;
+            width: 100vw;
+            height: 80px;
+            background-color: #6a8de2;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <template id="product-template">
+        <div class="product row">
+            <div class="p80 col">
+                <div class="title">1</div>
+                <div>
+                    <label for="url">Url:</label>
+                    <input class="url"></input>
+                </div>
+            </div>
+            <div class="p20 grid-2">
+                <div>Q:</div>
+                <input class="quantity"></input>
+                <div>$:</div>
+                <input class="price"></input>
+                <div>S:</div>
+                <input class="size"></input>
+            </div>
+        </div>
+    </template>
+    <div class="center">
+        <header>
+            Gumy Scalper Bot &lt;3
+        </header>
+        <main>
+            <div id="product-grid">
+            </div>
+            <div id="billing-grid">
+                <div>
+                    <div>Billing Info:</div>
+                    <input></input>
+                </div>
+                <div>
+                    <div>Card Info:</div>
+                    <input></input>
+                </div>
+                <div>
+                    <div>Shipping Info:</div>
+                    <input></input>
+                </div>
+                <div>
+                    <div>CCV Info:</div>
+                    <input></input>
+                    <div>Month/Year:</div>
+                    <input></input>
+                    <div>Type:</div>
+                    <input></input>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <button id="start-button">Start/Stop</button>
+            <div>console logs</div>
+        </footer>
+    </div>
+
+    <script>
+        const productTemplate = document.getElementById("product-template");
+        const productGrid = document.getElementById("product-grid");
+
+        productGrid.appendChild(productTemplate.content.cloneNode(true));
+        productGrid.appendChild(productTemplate.content.cloneNode(true));
+        productGrid.appendChild(productTemplate.content.cloneNode(true));
+        productGrid.appendChild(productTemplate.content.cloneNode(true));
+        productGrid.appendChild(productTemplate.content.cloneNode(true));
+        productGrid.appendChild(productTemplate.content.cloneNode(true));
+
+        let index = 1;
+
+        for (const child of productGrid.children) {
+            const title = child.querySelector('.title');
+            title.textContent = index;
+            ++index;
+        }
+
+        const startButton = document.querySelector('#start-button');
+        startButton.addEventListener('click', function () {
+            const child = productGrid.children[0];
+            const productUrl = child.querySelector('.url').value;
+            const productQuantity = child.querySelector('.quantity').value;
+            const productPrice = child.querySelector('.price').value;
+            fetch(`/api/watch-product?url=${productUrl},quantity=${productQuantity},price=${productPrice}`, {
+                method: 'GET'
+            });
+            console.log(productUrl, productQuantity, productPrice);
+        });
+    </script>
+</body>
+
 </html>
