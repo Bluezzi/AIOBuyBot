@@ -18,7 +18,7 @@ function question(message) {
 }
 
 //Email Sender
-//const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 
 const STORE_MAP = new Map([
     ['bb', 'BestBuy'],
@@ -90,7 +90,7 @@ async function prompt(promptMessage) {
     return rawInput.trim().toLowerCase();
 }
 
-/*
+/* LINE 283 ALSO
 //Function that emails the user about inventory and restock info
 async function email_sender(store, product, product_amount, restock_info) {
     // Generate test SMTP service account from ethereal.email
@@ -123,38 +123,38 @@ async function email_sender(store, product, product_amount, restock_info) {
 */
 
 //AIO Inventory
-function queryProductStockAmount(store, product) {
+function queryProductStockAmount(selectedStore, selectedProduct) {
     //Best Buy (store) (product)
     //Function that checks desired products inventory
-    if ((store == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
+    if ((selectedStore == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
         //code to check product inventory
     } else {
     }
 
     //GameStop (store) (product)
     //Function that checks desired products inventory
-    if ((store == 'GameStop', 'gamestop', 'gs', 'GS')) {
+    if ((selectedStore == 'GameStop', 'gamestop', 'gs', 'GS')) {
         //code to check product inventory
     } else {
     }
 
     //Nike (store) (product)
     //Function that checks desired products inventory
-    if ((store == 'Nike', 'nike', 'N', 'n')) {
+    if ((selectedStore == 'Nike', 'nike', 'N', 'n')) {
         //code to check product inventory
     } else {
     }
 
     //Adidas (store) (product)
     //Function that checks desired products inventory
-    if ((store == 'Adidas', 'adidas', 'A', 'a')) {
+    if ((selectedStore == 'Adidas', 'adidas', 'A', 'a')) {
         //code to check product inventory
     } else {
     }
 
     //Footlocker (store) (product)
     //Function that checks desired products inventory
-    if ((store == 'FootLocker', 'footlocker', 'fl', 'FL')) {
+    if ((selectedStore == 'FootLocker', 'footlocker', 'fl', 'FL')) {
         //code to check product inventory
     } else {
     }
@@ -163,76 +163,76 @@ function queryProductStockAmount(store, product) {
 }
 
 //AIO Restock
-async function product_restock_info(store, product) {
+async function product_restock_info(selectedStore, selectedProduct) {
     //Best Buy (store) (product)
     //Function that checks the restock info
-    if ((store == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
+    if ((selectedStore == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
         //code to check restock info here
     } else {
     }
 
     //GameStop (store) (produc
     //Function that checks the restock info
-    if ((store == 'GameStop', 'gamestop', 'gs', 'GS')) {
+    if ((selectedStore == 'GameStop', 'gamestop', 'gs', 'GS')) {
         //code to check restock info here
     } else {
     }
 
     //Nike (store) (product)
     //Function that checks the restock info
-    if ((store == 'Nike', 'nike', 'N', 'n')) {
+    if ((selectedStore == 'Nike', 'nike', 'N', 'n')) {
         //code to check restock info here
     } else {
     }
 
     //Adidas (store) (product)
     //Function that checks the restock info
-    if ((store == 'Adidas', 'adidas', 'A', 'a')) {
+    if ((selectedStore == 'Adidas', 'adidas', 'A', 'a')) {
         //code to check restock info here
     } else {
     }
 
     //Footlocker (store) (product)
     //Function that checks the restock info
-    if ((store == 'FootLocker', 'footlocker', 'fl', 'FL')) {
+    if ((selectedStore == 'FootLocker', 'footlocker', 'fl', 'FL')) {
         //code to check restock info here
     } else {
     }
 }
 
 //AIO Buy Bot
-async function tryBuyProduct(store, product, product_size, product_price_cap, quantity_to_buy, shippinginfo, billinginfo) {
+async function tryBuyProduct(selectedStore, selectedProduct, productSize, productPriceCap, quantityToBuy, shippingInfo, billingInfo) {
     //Best Buy (store) (product)
     //Function that buys product
-    if ((store == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
+    if ((selectedStore == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
         //code to buy product here
     } else {
     }
 
     //GameStop
     //Function that buys product
-    if ((store == 'GameStop', 'gamestop', 'gs', 'GS')) {
+    if ((selectedStore == 'GameStop', 'gamestop', 'gs', 'GS')) {
         //code to buy product here
     } else {
     }
 
     //Nike
     //Function that buys product
-    if ((store == 'Nike', 'nike', 'N', 'n')) {
+    if ((selectedStore == 'Nike', 'nike', 'N', 'n')) {
         //code to buy product here
     } else {
     }
 
     //Adidas
     //Function that buys product
-    if ((store == 'Adidas', 'adidas', 'A', 'a')) {
+    if ((selectedStore == 'Adidas', 'adidas', 'A', 'a')) {
         //code to buy product here
     } else {
     }
 
     //Footlocker
     //Function that buys product
-    if ((store == 'FootLocker', 'footlocker', 'fl', 'FL')) {
+    if ((selectedStore == 'FootLocker', 'footlocker', 'fl', 'FL')) {
         //code to buy product here
     } else {
     }
@@ -279,7 +279,9 @@ async function main() {
                 console.log(`${selectedProduct} in stock: ${productStock}`);
                 const restock_info = await product_restock_info(selectedStore, selectedProduct);
                 console.log(`${selectedProduct} Restock Info: ${restock_info}`);
-                const send_info_email = await email_sender(selectedStore, selectedProduct);
+                
+                //FUNCTION FOR SENDING EMAILS - FIX THE EMAIL FUNCTION
+                //const send_info_email = await email_sender(selectedStore, selectedProduct);
                 console.log(`Inventory and Restock Info has been sent via e-mail`);
             }
             break;
