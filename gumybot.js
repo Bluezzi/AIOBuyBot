@@ -20,6 +20,7 @@ function question(message) {
 //Email Sender
 const nodemailer = require("nodemailer");
 
+//Stores
 const STORE_MAP = new Map([
     ['bb', 'BestBuy'],
     ['gs', 'GameStop'],
@@ -76,6 +77,7 @@ async function promptForNumber(promptMessage, validateCallback, invalidCallback)
         }
     }
 }
+
 async function promptForPositiveNumber(promptMessage) {
     return await promptForNumber(
         promptMessage,
@@ -90,8 +92,7 @@ async function prompt(promptMessage) {
     return rawInput.trim().toLowerCase();
 }
 
-/* LINE 283 ALSO
-//Function that emails the user about inventory and restock info
+//Function that emails the user about inventory and restock info -/-LINE 234-\-
 async function email_sender(store, product, product_amount, restock_info) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
@@ -120,121 +121,70 @@ async function email_sender(store, product, product_amount, restock_info) {
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }
-*/
 
 //AIO Inventory
 function queryProductStockAmount(selectedStore, selectedProduct) {
-    //Best Buy (store) (product)
     //Function that checks desired products inventory
-    if ((selectedStore == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
+    if ((['bb'].includes(selectedStore))) {
+        //BestBuy
+        //code to check product inventory
+    } else if ((['gs'].includes(selectedStore))) {
+        //GameStop
+        //code to check product inventory
+    } else if ((['n'].includes(selectedStore))) {
+        //Nike
+        //code to check product inventory
+    } else if ((['a'].includes(selectedStore))) {
+        //Adidas
         //code to check product inventory
     } else {
-    }
-
-    //GameStop (store) (product)
-    //Function that checks desired products inventory
-    if ((selectedStore == 'GameStop', 'gamestop', 'gs', 'GS')) {
+        ((['fl'].includes(selectedStore)))
+        //Footlocker
         //code to check product inventory
-    } else {
     }
-
-    //Nike (store) (product)
-    //Function that checks desired products inventory
-    if ((selectedStore == 'Nike', 'nike', 'N', 'n')) {
-        //code to check product inventory
-    } else {
-    }
-
-    //Adidas (store) (product)
-    //Function that checks desired products inventory
-    if ((selectedStore == 'Adidas', 'adidas', 'A', 'a')) {
-        //code to check product inventory
-    } else {
-    }
-
-    //Footlocker (store) (product)
-    //Function that checks desired products inventory
-    if ((selectedStore == 'FootLocker', 'footlocker', 'fl', 'FL')) {
-        //code to check product inventory
-    } else {
-    }
-
-    return 0;
 }
 
 //AIO Restock
 async function product_restock_info(selectedStore, selectedProduct) {
-    //Best Buy (store) (product)
     //Function that checks the restock info
-    if ((selectedStore == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
+    if ((['bb'].includes(selectedStore))) {
+        //BestBuy
+        //code to check restock info here
+    } else if ((['gs'].includes(selectedStore))) {
+        //GameStop
+        //code to check restock info here
+    } else if ((['n'].includes(selectedStore))) {
+        //Nike
+        //code to check restock info here
+    } else if ((['a'].includes(selectedStore))) {
+        //Adidas
         //code to check restock info here
     } else {
-    }
-
-    //GameStop (store) (produc
-    //Function that checks the restock info
-    if ((selectedStore == 'GameStop', 'gamestop', 'gs', 'GS')) {
+        ((['fl'].includes(selectedStore)))
+        //Footlocker
         //code to check restock info here
-    } else {
-    }
-
-    //Nike (store) (product)
-    //Function that checks the restock info
-    if ((selectedStore == 'Nike', 'nike', 'N', 'n')) {
-        //code to check restock info here
-    } else {
-    }
-
-    //Adidas (store) (product)
-    //Function that checks the restock info
-    if ((selectedStore == 'Adidas', 'adidas', 'A', 'a')) {
-        //code to check restock info here
-    } else {
-    }
-
-    //Footlocker (store) (product)
-    //Function that checks the restock info
-    if ((selectedStore == 'FootLocker', 'footlocker', 'fl', 'FL')) {
-        //code to check restock info here
-    } else {
     }
 }
 
 //AIO Buy Bot
 async function tryBuyProduct(selectedStore, selectedProduct, productSize, productPriceCap, quantityToBuy, shippingInfo, billingInfo) {
-    //Best Buy (store) (product)
     //Function that buys product
-    if ((selectedStore == 'BestBuy', 'bestbuy', 'bb', 'BB')) {
+    if ((['bb'].includes(selectedStore))) {
+        //BestBuy
+        //code to buy product here
+    } else if ((['gs'].includes(selectedStore))) {
+        //GameStop
+        //code to buy product here
+    } else if ((['n'].includes(selectedStore))) {
+        //Nike
+        //code to buy product here
+    } else if ((['a'].includes(selectedStore))) {
+        //Adidas
         //code to buy product here
     } else {
-    }
-
-    //GameStop
-    //Function that buys product
-    if ((selectedStore == 'GameStop', 'gamestop', 'gs', 'GS')) {
+        ((['fl'].includes(selectedStore)))
+        //Footlocker
         //code to buy product here
-    } else {
-    }
-
-    //Nike
-    //Function that buys product
-    if ((selectedStore == 'Nike', 'nike', 'N', 'n')) {
-        //code to buy product here
-    } else {
-    }
-
-    //Adidas
-    //Function that buys product
-    if ((selectedStore == 'Adidas', 'adidas', 'A', 'a')) {
-        //code to buy product here
-    } else {
-    }
-
-    //Footlocker
-    //Function that buys product
-    if ((selectedStore == 'FootLocker', 'footlocker', 'fl', 'FL')) {
-        //code to buy product here
-    } else {
     }
 }
 
@@ -279,7 +229,7 @@ async function main() {
                 console.log(`${selectedProduct} in stock: ${productStock}`);
                 const restock_info = await product_restock_info(selectedStore, selectedProduct);
                 console.log(`${selectedProduct} Restock Info: ${restock_info}`);
-                
+
                 //FUNCTION FOR SENDING EMAILS - FIX THE EMAIL FUNCTION
                 //const send_info_email = await email_sender(selectedStore, selectedProduct);
                 console.log(`Inventory and Restock Info has been sent via e-mail`);
