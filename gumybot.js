@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 })
 
 //Email Sender
-//Import Here
+const nodemailer = require("nodemailer");
 
 //Function that handles shipping information
 async function shipping_info() {
@@ -145,8 +145,33 @@ const userinput_quantity_to_buy = () => {
 
 
 //Function that emails the user about inventory and restock info
-async function email_sender(store, product) {
-    //code to send the email here
+async function email_sender(store, product, product_amount, restock_info) {
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    // let testAccount = await nodemailer.createTestAccount();
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: "gumythebot@gmail.com",//testAccount.user, // generated ethereal user
+            pass: "Masoncade1"//testAccount.pass, // generated ethereal password
+        },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+        from: '"GUMY Bot <3" <gumythebot@gmail.com>', // sender address
+        to: `${process.env.USEREMAIL}`, // list of receivers
+        subject: `${product} Inventory/Restock Information (From: ${store})`, // Subject line
+        text: `${product} in stock: ${product_amount} \n ${product} Restock Info: ${restock_info}`, // plain text body
+        //html: "<b>Hello world?</b>", // html body
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }
 
 
@@ -302,7 +327,7 @@ async function main() {
     } else {
         (buy_action_command_list.includes(action_command.toLowerCase()))
         //Runs the Functions for buying the desired product (loops until product comes in stock)
-        
+
         //Prudct size if applicable 
         if (store == "n,", "a", "fl") {
             let product_size = await userinput_product_size();
