@@ -1,6 +1,6 @@
 //AIOBOT
 
-//User Input
+//User Inputs
 //const { responsiveArray } = require('antd/lib/_util/responsiveObserve')
 const readline = require('readline');
 
