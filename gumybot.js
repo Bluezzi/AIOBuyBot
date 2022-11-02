@@ -242,6 +242,32 @@ async function main() {
                 if (['n', 'a', 'fl'].includes(selectedStore)) {
                     const productSize = await promptForPositiveNumber('Please pick the size you would like to purchase: ');
                     console.log(`Product size: ${productSize}`);
+
+                    //After asking for size proceeds to run the buy portion
+                    const quantityToBuy = await promptForPositiveNumber('How many would you like to purchase? ');
+                    console.log(`Amount to purchase: ${quantityToBuy}`);
+                    const productPriceCap = await promptForPositiveNumber('Set max budget: ');
+                    console.log(`Product budget: ${productPriceCap}`);
+
+                    let currentPurchaseCount = 0;
+                    // need some kind of function
+                    while (currentPurchaseCount < quantityToBuy) {
+                        const productStockAvailable = queryProductStockAmount(selectedStore, selectedProduct);
+                        if (productStockAvailable === 0) {
+                            console.log(`${selectedProduct} not in stock, retrying \n *LEAVE PROGRAM RUNNING*`);
+                        } else {
+                            console.log(`${selectedProduct} in stock: ${productStockAvailable}`);
+                            console.log(`attempting to buy ${quantityToBuy}`);
+                            const numberBought = await tryBuyProduct(selectedStore, selectedProduct, product_size, productPriceCap, quantityToBuy, shippingInfo, billingInfo);
+                            if (numberBought > 0) {
+                                console.log(`${selectedProduct}'s purchased: ${numberBought}`);
+                                currentPurchaseCount += numberBought;
+                            } else {
+                                console.log(`could not buy ${selectedProduct}`);
+                            }
+                        }
+                    }
+
                 } else {
                     const quantityToBuy = await promptForPositiveNumber('How many would you like to purchase? ');
                     console.log(`Amount to purchase: ${quantityToBuy}`);
